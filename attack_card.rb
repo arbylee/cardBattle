@@ -8,5 +8,9 @@ class AttackCard
   def perform user, opponent
     opponent.take_damage power
   end
+
+  def description
+    "Attack (#{power})"
+  end
 end
 
