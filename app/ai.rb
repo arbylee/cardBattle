@@ -1,3 +1,5 @@
+require_relative "player"
+
 class Ai < Player
   def get_next_battle_card
     choices = []

@@ -1,7 +1,8 @@
 class Battle
-  def initialize player1, player2
+  def initialize player1, player2, ui
     @player1 = player1
     @player2 = player2
+    @ui = ui
   end
 
   def resolve
@@ -24,9 +25,9 @@ class Battle
     end
 
     if @player1.alive?
-      puts "Player 1 wins"
+      @ui.display "Player 1 wins"
     else
-      puts "Player 2 wins"
+      @ui.display "Player 2 wins"
     end
   end
 end

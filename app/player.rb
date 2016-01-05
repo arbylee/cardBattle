@@ -1,6 +1,7 @@
 require_relative "deck"
 class Player
-  def initialize
+  def initialize ui
+    @ui = ui
     @deck = Deck.new
     @health = 20
   end
@@ -20,7 +21,7 @@ class Player
 
     while !valid_choices.include? player_choice
       choices.each_with_index do |card, index|
-        puts "#{index}) #{card.description}"
+        @ui.display "#{index}) #{card.description}"
         valid_choices << index.to_s
       end
       player_choice = gets.chomp
