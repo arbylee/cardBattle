@@ -5,5 +5,9 @@ class BasicAttackCard < Card
   def perform user, opponent
     opponent.take_damage power
   end
+
+  def description
+    "#{name} (#{power}), Priority: #{priority}"
+  end
 end
 

@@ -26,4 +26,8 @@ class CliUi
   def display_playing_card player, card
     puts "#{player.name} plays #{card.description}"
   end
+
+  def line_break
+    puts
+  end
 end

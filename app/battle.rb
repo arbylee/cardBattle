@@ -12,39 +12,39 @@ class Battle
     @player1.shuffle_deck
     @player2.shuffle_deck
 
-    while true
+    while @player1.alive? && @player2.alive?
       @ui.display_player @player1
       @ui.display_player @player2
+      @ui.line_break
 
       player1_selected_cards = @player1.get_next_battle_cards
       player2_selected_cards = @player2.get_next_battle_cards
-
       @ui.display_selected_cards @player1, player1_selected_cards
       @ui.display_selected_cards @player2, player2_selected_cards
+      @ui.line_break
 
       player1_card = @card_transmuter.transmute player1_selected_cards
       player2_card = @card_transmuter.transmute player2_selected_cards
+      @ui.line_break
 
-      @ui.display_playing_card @player1, player1_card
-      player1_card.perform @player1, @player2
-      if !@player2.alive?
-        break
+      [
+        {card: player1_card, source: @player1, target: @player2},
+        {card: player2_card, source: @player2, target: @player1},
+      ].sort_by {|player_action| player_action[:card].priority}.reverse!.each do |action|
+        @ui.display_playing_card action[:source], action[:card]
+        action[:card].perform action[:source], action[:target]
+        break if !@player1.alive? || !@player2.alive?
       end
-
-      @ui.display_playing_card @player2, player2_card
-      player2_card.perform @player2, @player1
-      if !@player1.alive?
-        break
-      end
-
       player1_selected_cards.each {|card| @player1.discard card}
       player2_selected_cards.each {|card| @player2.discard card}
     end
 
-    if @player1.alive?
-      @ui.display "#{@player1.name} wins"
-    else
+    @ui.display_player @player1
+    @ui.display_player @player2
+    if !@player1.alive?
       @ui.display "#{@player2.name} wins"
+    else
+      @ui.display "#{@player1.name} wins"
     end
   end
 end
