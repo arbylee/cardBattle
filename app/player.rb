@@ -60,6 +60,7 @@ class Player
   end
 
   def take_damage amount
+    @ui.take_damage self, amount
     @health -= amount
   end
 

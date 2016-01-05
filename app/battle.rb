@@ -15,17 +15,14 @@ class Battle
     while @player1.alive? && @player2.alive?
       @ui.display_player @player1
       @ui.display_player @player2
-      @ui.line_break
 
       player1_selected_cards = @player1.get_next_battle_cards
       player2_selected_cards = @player2.get_next_battle_cards
       @ui.display_selected_cards @player1, player1_selected_cards
       @ui.display_selected_cards @player2, player2_selected_cards
-      @ui.line_break
 
       player1_card = @card_transmuter.transmute player1_selected_cards, @player1.recipe_book
       player2_card = @card_transmuter.transmute player2_selected_cards, @player2.recipe_book
-      @ui.line_break
 
       [
         {card: player1_card, source: @player1, target: @player2},

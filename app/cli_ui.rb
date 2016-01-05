@@ -18,13 +18,21 @@ class CliUi
   end
 
   def display_selected_cards player, cards
-    card_descriptions = cards.map{|card| card.description}.join ", "
-    output = "#{player.name} selects #{card_descriptions}"
-    puts output
+    puts "#{player.name} selects "
+    cards.each do |card|
+      puts "#{card.description}"
+    end
+    line_break
   end
 
   def display_playing_card player, card
     puts "#{player.name} plays #{card.description}"
+    line_break
+  end
+
+  def take_damage player, amount
+    puts "#{player.name} takes #{amount} damage"
+    line_break
   end
 
   def line_break

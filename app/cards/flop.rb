@@ -10,6 +10,10 @@ class Flop < Card
     "Flop"
   end
 
+  def description
+    "#{name} (-#{@power}), Priority: #{priority}"
+  end
+
   def perform user, opponent
     user.take_damage @power
   end
