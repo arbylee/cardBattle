@@ -7,23 +7,23 @@ class CliUi
     gets.chomp.downcase
   end
 
-  def displayCardOption option
+  def display_card_option option
     output = "#{option[:selector]}) #{option[:card].description}"
     output += " *" if option[:selected]
     puts output
   end
 
-  def displayPlayer player
+  def display_player player
     puts "#{player.name}: #{player.health}"
   end
 
-  def displaySelectedCards player, cards
+  def display_selected_cards player, cards
     card_descriptions = cards.map{|card| card.description}.join ", "
     output = "#{player.name} selects #{card_descriptions}"
     puts output
   end
 
-  def displayPlayingCard player, card
+  def display_playing_card player, card
     puts "#{player.name} plays #{card.description}"
   end
 end

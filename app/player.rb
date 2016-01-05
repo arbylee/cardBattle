@@ -28,16 +28,16 @@ class Player
 
     user_input = nil
 
+    selected_options = options.values.select {|opt| opt[:selected]}
     while user_input != InputConstants::OK
       options[user_input][:selected] = !options[user_input][:selected] if options[user_input]
 
       options.each_value do |option|
-        @ui.displayCardOption option
+        @ui.display_card_option option
       end
       user_input = @ui.get_input
     end
 
-    selected_options = options.values.select {|opt| opt[:selected]}
     return selected_options.collect {|o| o[:card]}
   end
 
