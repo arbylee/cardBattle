@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+lib_path = File.expand_path('../../app', __FILE__)
+$:.unshift(lib_path)
+require 'runner'
+Runner.run

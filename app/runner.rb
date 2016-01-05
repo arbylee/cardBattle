@@ -1,10 +1,8 @@
 require_relative "game"
 
-class Runner
+module Runner
   def self.run
     game = Game.new
     game.start
   end
 end
-
-Runner.run
