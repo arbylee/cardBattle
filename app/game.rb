@@ -3,6 +3,7 @@ require_relative "attack_card"
 require_relative "cli_ui"
 require_relative "battle"
 require_relative "player"
+
 class Game
   def initialize
     @ui = CliUi.new

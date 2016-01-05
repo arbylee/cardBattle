@@ -1,7 +1,7 @@
 require_relative "player"
 
 class Ai < Player
-  def get_next_battle_card
+  def get_next_battle_cards
     choices = []
     3.times do
       choices << @deck.get_next_card
@@ -12,6 +12,6 @@ class Ai < Player
       discard leftover_card
     end
 
-    return selected
+    return [selected]
   end
 end

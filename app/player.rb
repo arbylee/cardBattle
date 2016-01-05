@@ -1,37 +1,42 @@
 require_relative "deck"
+require_relative "input_constants"
+
 class Player
   def initialize ui
     @ui = ui
     @deck = Deck.new
     @health = 20
+    @hand_limit = 3
+    @hand = []
   end
 
   def add_card card
     @deck.add card
   end
 
-  def get_next_battle_card
-    choices = []
-    valid_choices = []
-    player_choice = nil
+  def get_next_battle_cards
+    options = {}
 
-    3.times do
-      choices << @deck.get_next_card
+    while @hand.size < @hand_limit
+      @hand << @deck.get_next_card
+    end
+    @hand.each_with_index do |card, index|
+      options[index.to_s] = {selected: false, card: card, selector: index}
     end
 
-    while !valid_choices.include? player_choice
-      choices.each_with_index do |card, index|
-        @ui.display "#{index}) #{card.description}"
-        valid_choices << index.to_s
+    user_input = nil
+
+    while user_input != InputConstants::OK
+      options[user_input][:selected] = !options[user_input][:selected] if options[user_input]
+
+      options.each_value do |option|
+        @ui.displayCardOption option
       end
-      player_choice = gets.chomp
-    end
-    selected = choices.slice! player_choice.to_i
-    choices.each do |leftover_card|
-      discard leftover_card
+      user_input = @ui.get_input
     end
 
-    return selected
+    selected_options = options.values.select {|opt| opt[:selected]}
+    return selected_options.collect {|o| o[:card]}
   end
 
   def discard card
