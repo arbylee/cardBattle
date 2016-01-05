@@ -9,6 +9,9 @@ class Battle
   end
 
   def resolve
+    @player1.shuffle_deck
+    @player2.shuffle_deck
+
     while true
       @ui.displayPlayer @player1
       @ui.displayPlayer @player2

@@ -11,7 +11,7 @@ class Deck
   def get_next_card
     if @cards.length == 0
       @cards = @discard
-      @cards.shuffle
+      @cards.shuffle!
       @discard = []
     end
     @cards.shift
@@ -19,6 +19,10 @@ class Deck
 
   def discard card
     @discard << card
+  end
+
+  def shuffle
+    @cards.shuffle!
   end
 end
 

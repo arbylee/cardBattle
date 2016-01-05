@@ -42,6 +42,7 @@ class Player
   end
 
   def discard card
+    @hand.delete card
     @deck.discard card
   end
 
@@ -51,6 +52,10 @@ class Player
 
   def take_damage amount
     @health -= amount
+  end
+
+  def shuffle_deck
+    @deck.shuffle
   end
 end
 
