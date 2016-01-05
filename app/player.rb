@@ -17,6 +17,7 @@ class Player
   end
 
   def get_next_battle_cards
+    ready = false
     options = {}
 
     while @hand.size < @hand_limit
@@ -26,16 +27,22 @@ class Player
       options[index.to_s] = {selected: false, card: card, selector: index}
     end
 
-    user_input = nil
-
-    selected_options = options.values.select {|opt| opt[:selected]}
-    while user_input != InputConstants::OK
-      options[user_input][:selected] = !options[user_input][:selected] if options[user_input]
-
+    while !ready
       options.each_value do |option|
         @ui.display_card_option option
       end
       user_input = @ui.get_input
+      if user_input == InputConstants::OK
+        selected_options = options.values.select {|opt| opt[:selected]}
+
+        if selected_options.length > 0
+          ready = true
+        else
+          @ui.display "You must choose at least one card to play"
+        end
+      else
+        options[user_input][:selected] = !options[user_input][:selected] if options[user_input]
+      end
     end
 
     return selected_options.collect {|o| o[:card]}
