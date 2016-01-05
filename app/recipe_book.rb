@@ -2,7 +2,7 @@ require_relative "cards/flop"
 require_relative "cards/combos/sucker_punch"
 
 class RecipeBook
-  ALL_RECIPES = {
+  RECIPES = {
     "Punch|Punch" => SuckerPunch
   }
   RECIPE_PROGRESS = {

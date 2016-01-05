@@ -1,15 +1,9 @@
-require_relative "cards/combos/sucker_punch"
 class CardTransmuter
-  RECIPES = {
-    "Punch|Punch" => SuckerPunch
-  }
-  def transmute cards
+  def transmute cards, recipe_book
     if cards.size > 1
       recipe_name = cards.collect {|card| card.name}.sort.join("|")
-      comboClass = RECIPES[recipe_name]
-      if comboClass
-        return comboClass.new
-      end
+      card = recipe_book.perform recipe_name
+      return card
     end
 
     return cards[0]

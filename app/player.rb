@@ -1,8 +1,9 @@
 require_relative "deck"
 require_relative "input_constants"
+require_relative "recipe_book"
 
 class Player
-  attr_reader :name, :health
+  attr_reader :name, :health, :recipe_book
   def initialize name, ui
     @name = name
     @ui = ui
@@ -10,6 +11,7 @@ class Player
     @health = 20
     @hand_limit = 3
     @hand = []
+    @recipe_book = RecipeBook.new
   end
 
   def add_card card
