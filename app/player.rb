@@ -2,7 +2,9 @@ require_relative "deck"
 require_relative "input_constants"
 
 class Player
-  def initialize ui
+  attr_reader :name, :health
+  def initialize name, ui
+    @name = name
     @ui = ui
     @deck = Deck.new
     @health = 20

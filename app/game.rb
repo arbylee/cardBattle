@@ -7,12 +7,12 @@ require_relative "player"
 class Game
   def initialize
     @ui = CliUi.new
-    @player1 = Player.new @ui
+    @player1 = Player.new "Player 1", @ui
     10.times do
       @player1.add_card AttackCard.new
     end
 
-    @player2 = Ai.new @ui
+    @player2 = Ai.new "Player 2", @ui
     10.times do
       @player2.add_card AttackCard.new
     end
